@@ -1,0 +1,13 @@
+_game/
+_pages/
+_pages2/
+_vc/
+_bold_verbs.py
+_extract.py
+_scan.py
+_scan_verbs.py
+data.json
+to_pdf_cdp.py
+to_pdf2.py
+*.pdf
+__pycache__/

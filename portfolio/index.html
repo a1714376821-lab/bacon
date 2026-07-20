@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>肖培轩 | Game Creative Portfolio</title>
+<style>
+/* ============================================================
+   DESIGN SYSTEM — Tencent IEG / NetEase S-Level Standard
+   060B14 Deep Navy · 00E0FF Electric Cyan · 7C5CFC Violet
+   ============================================================ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:#060B14;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+/* ---- VIEWPORT (16:9 locked) ---- */
+.viewport{width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;background:#060B14}
+.stage{position:relative;width:min(96vw,170.667vh);height:min(54vw,96vh);aspect-ratio:16/9;overflow:hidden;background:#060B14}
+
+/* ---- SLIDES ---- */
+.slides{width:100%;height:100%;position:relative}
+.slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .45s ease;pointer-events:none;padding:5% 7%}
+.slide.active{opacity:1;pointer-events:all}
+
+/* ---- GRID HELPERS ---- */
+.col2{display:grid;grid-template-columns:1fr 1fr;gap:5%;width:100%;align-items:center}
+.col2-w{display:grid;grid-template-columns:1.25fr 1fr;gap:5%;width:100%;align-items:center}
+.col3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3%;width:100%}
+.col4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:2.5%;width:100%}
+.stack{display:flex;flex-direction:column;gap:1.6vh;width:100%}
+.stack-s{display:flex;flex-direction:column;gap:0.8vh;width:100%}
+.full{width:100%}
+.center{text-align:center}
+
+/* ---- TYPOGRAPHY ---- */
+.mono{font-family:"SF Mono","Fira Code","JetBrains Mono",Consolas,monospace;letter-spacing:.04em}
+.t-section{font-size:clamp(0.58rem,1.15vh,0.72rem);color:rgba(255,255,255,0.22);text-transform:uppercase;letter-spacing:.18em;font-family:"SF Mono",Consolas,monospace}
+.t-h1{font-size:clamp(2.4rem,7.5vh,5.5rem);font-weight:800;color:#fff;line-height:1.05;letter-spacing:-.025em}
+.t-h2{font-size:clamp(1.5rem,4.2vh,3rem);font-weight:700;color:#fff;line-height:1.15;letter-spacing:-.015em}
+.t-h3{font-size:clamp(1rem,2.5vh,1.7rem);font-weight:700;color:#fff;line-height:1.25}
+.t-h4{font-size:clamp(0.8rem,1.9vh,1.2rem);font-weight:600;color:#fff;line-height:1.35}
+.t-body{font-size:clamp(0.62rem,1.45vh,0.85rem);color:rgba(255,255,255,0.68);line-height:1.7}
+.t-body-s{font-size:clamp(0.52rem,1.15vh,0.7rem);color:rgba(255,255,255,0.45);line-height:1.6}
+.t-num-xl{font-size:clamp(3rem,9vh,6.5rem);font-weight:900;line-height:1;letter-spacing:-.04em}
+.t-num-lg{font-size:clamp(1.8rem,5vh,3.5rem);font-weight:800;line-height:1;letter-spacing:-.02em}
+.t-num-md{font-size:clamp(1.2rem,3.2vh,2.2rem);font-weight:700;line-height:1}
+
+/* ---- COLORS ---- */
+.c-cyan{color:#00E0FF}.c-purple{color:#7C5CFC}.c-green{color:#00D68F}.c-amber{color:#F0A030}.c-pink{color:#F05080}.c-white{color:#fff}.c-dim{color:rgba(255,255,255,0.4)}.c-superdim{color:rgba(255,255,255,0.18)}
+.g-cyan{text-shadow:0 0 35px rgba(0,224,255,0.35),0 0 70px rgba(0,224,255,0.12)}
+.g-purple{text-shadow:0 0 35px rgba(124,92,252,0.35)}
+
+/* ---- DIVIDERS ---- */
+.hr{width:100%;height:1px;background:linear-gradient(90deg,rgba(255,255,255,0.08) 0%,rgba(255,255,255,0.02) 100%);margin:.8vh 0}
+.hr-cyan{width:56px;height:2px;background:#00E0FF;margin:.8vh 0}
+
+/* ---- CARDS ---- */
+.card{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.05);border-radius:6px;padding:4% 5%}
+.card-l{padding:3% 4%;border-left:3px solid;border-radius:0 6px 6px 0}
+.card-l.c{border-color:#00E0FF;background:rgba(0,224,255,0.035)}
+.card-l.p{border-color:#7C5CFC;background:rgba(124,92,252,0.035)}
+.card-l.g{border-color:#00D68F;background:rgba(0,214,143,0.035)}
+.card-l.a{border-color:#F0A030;background:rgba(240,160,48,0.035)}
+
+/* ---- TAGS ---- */
+.tag{display:inline-block;padding:0.35vh 0.9vw;border:1px solid rgba(255,255,255,0.12);border-radius:20px;font-size:clamp(0.5rem,1.05vh,0.68rem);color:rgba(255,255,255,0.5);margin:0.25vh 0.3vw}
+.tag-c{border-color:#00E0FF;color:#00E0FF}.tag-p{border-color:#7C5CFC;color:#7C5CFC}.tag-g{border-color:#00D68F;color:#00D68F}
+
+/* ---- DATA ---- */
+.data-row{display:flex;gap:5%;width:100%;justify-content:center}
+.data-unit{text-align:center;flex:1}
+.data-unit .val{font-size:clamp(1.4rem,4.2vh,2.8rem);font-weight:900;line-height:1;font-family:Inter,"SF Pro Display",sans-serif}
+.data-unit .lbl{font-size:clamp(0.48rem,1vh,0.65rem);color:rgba(255,255,255,0.3);margin-top:0.6vh}
+
+/* ---- LINKS ---- */
+.lnk{display:inline-flex;align-items:center;gap:0.5vw;padding:0.7vh 1.3vw;border:1px solid rgba(0,224,255,0.35);border-radius:5px;color:#00E0FF;font-size:clamp(0.55rem,1.2vh,0.75rem);transition:all .25s;cursor:pointer;background:rgba(0,224,255,0.04);font-family:inherit}
+.lnk:hover{background:rgba(0,224,255,0.12);border-color:#00E0FF;transform:translateY(-1px)}
+.lnk.p{border-color:rgba(124,92,252,0.35);color:#7C5CFC;background:rgba(124,92,252,0.04)}
+.lnk.p:hover{background:rgba(124,92,252,0.12);border-color:#7C5CFC}
+
+/* ---- PROCESS FLOW ---- */
+.flow-row{display:flex;align-items:center;gap:0;width:100%}
+.flow-step{flex:1;text-align:center;padding:3% 2%;position:relative}
+.flow-step .icon{font-size:clamp(1rem,2.2vh,1.6rem);margin-bottom:0.6vh}
+.flow-step .label{font-size:clamp(0.55rem,1.15vh,0.72rem);color:rgba(255,255,255,0.5)}
+.flow-arr{color:#00E0FF;font-size:clamp(0.8rem,1.6vh,1.1rem);flex-shrink:0;opacity:0.5}
+
+/* ---- CORNER DECO ---- */
+.corner-tl,.corner-br{position:absolute;width:28px;height:28px;opacity:0.1}
+.corner-tl{top:5%;left:6%;border-top:1px solid #00E0FF;border-left:1px solid #00E0FF}
+.corner-br{bottom:5%;right:6%;border-bottom:1px solid #00E0FF;border-right:1px solid #00E0FF}
+
+/* ---- NAV ---- */
+.nav{position:absolute;bottom:3%;left:50%;transform:translateX(-50%);z-index:99;display:flex;align-items:center;gap:1vw}
+.nav-dots{display:flex;gap:0.5vw}
+.nav-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.14);cursor:pointer;transition:all .3s}
+.nav-dot.active{background:#00E0FF;box-shadow:0 0 8px rgba(0,224,255,0.5)}
+.nav-btn{background:none;border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.35);padding:0.45vh 0.9vw;border-radius:4px;cursor:pointer;font-size:clamp(0.5rem,1vh,0.65rem);transition:all .25s;font-family:inherit}
+.nav-btn:hover{border-color:#00E0FF;color:#00E0FF}
+.nav-num{color:rgba(255,255,255,0.18);font-size:clamp(0.48rem,0.95vh,0.6rem);font-family:"SF Mono",Consolas,monospace}
+
+/* ---- PAGE SPECIFIC ---- */
+
+/* P1 - Cover */
+.p1-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 30% 55%,rgba(0,224,255,0.06) 0%,transparent 55%),radial-gradient(ellipse at 72% 25%,rgba(124,92,252,0.05) 0%,transparent 50%),linear-gradient(180deg,#060B14 0%,#0A1224 100%)}
+.p1-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.01) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.01) 1px,transparent 1px);background-size:6.5% 6.5%}
+
+/* P3 - Radar rings */
+.p3-ring{position:absolute;border:1px solid rgba(0,224,255,0.06);border-radius:50%}
+
+/* Metrics bar */
+.metrics-bar{display:flex;gap:0;width:100%;height:clamp(3px,0.4vh,5px);border-radius:2px;overflow:hidden;background:rgba(255,255,255,0.04)}
+.metrics-fill{height:100%;border-radius:2px}
+
+/* Game card for P9 */
+.game-card{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.05);border-radius:8px;padding:5% 6%;text-align:center;transition:all .3s}
+.game-card:hover{border-color:rgba(0,224,255,0.2);background:rgba(0,224,255,0.03)}
+.game-card .emoji{font-size:clamp(1.6rem,3.5vh,2.5rem);margin-bottom:0.8vh}
+
+/* ---- ANIMATIONS ---- */
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.slide.active .anim-up{animation:fadeUp .6s ease both}
+.slide.active .anim-d1{animation-delay:.1s}.slide.active .anim-d2{animation-delay:.2s}.slide.active .anim-d3{animation-delay:.3s}.slide.active .anim-d4{animation-delay:.4s}
+
+/* ---- PRINT ---- */
+@media print{
+  @page{size:1920px 1080px landscape;margin:0}
+  html,body{width:1920px;height:auto;overflow:visible;background:#060B14;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .viewport{width:1920px;height:auto;display:block}
+  .stage{width:1920px;height:auto;overflow:visible;display:block;position:static}
+  .slides{position:static;display:block}
+  .slide{position:relative;display:flex;opacity:1;pointer-events:all;width:1920px;height:1080px;page-break-after:always;overflow:hidden;padding:96px 134px;box-sizing:border-box}
+  .slide:last-child{page-break-after:avoid}
+  .nav{display:none}
+}
+
+/* ---- RESPONSIVE ---- */
+@media(max-width:768px){
+  .col2,.col2-w{grid-template-columns:1fr}.col3,.col4{grid-template-columns:1fr 1fr}
+  .flow-row{flex-wrap:wrap}.flow-arr{display:none}
+  .slide{padding:8% 6%}
+}
+</style>
+</head>
+<body>
+
+<div class="viewport">
+<div class="stage" id="stage">
+<div class="slides" id="slides">
+
+<!-- ================================================================
+     PAGE 01 — COVER
+     一句话定位。强视觉。Hook。
+     ================================================================ -->
+<div class="slide active" data-index="0">
+  <span class="corner-tl"></span><span class="corner-br"></span>
+  <div class="p1-bg"></div><div class="p1-grid"></div>
+  <div style="position:relative;z-index:2;width:100%">
+    <div class="t-section anim-up" style="margin-bottom:3.5vh">GAME CREATIVE PORTFOLIO</div>
+    <div class="t-h1 anim-up anim-d1" style="margin-bottom:2vh">
+      游戏广告<br>
+      <span class="c-cyan g-cyan">创意作品集</span>
+    </div>
+    <div class="hr-cyan anim-up anim-d2" style="margin-bottom:2.5vh;width:64px"></div>
+    <div class="t-h4 anim-up anim-d2" style="color:rgba(255,255,255,0.42);font-weight:500;margin-bottom:1vh">
+      Creative Strategist &nbsp;×&nbsp; AI Creative &nbsp;×&nbsp; Game Advertising
+    </div>
+    <div class="t-body-s anim-up anim-d2" style="color:rgba(0,224,255,0.4);margin-bottom:3vh;letter-spacing:.06em">
+      目标岗位：试玩广告创意策划
+    </div>
+    <div class="t-body-s anim-up anim-d3" style="color:rgba(255,255,255,0.25)">
+      肖培轩 &nbsp;·&nbsp; 华南师范大学 · 传播学 &nbsp;|&nbsp; <a href="tel:13538047789" style="color:rgba(255,255,255,0.35);text-decoration:none">13538047789</a> &nbsp;|&nbsp; <a href="mailto:1714376821@qq.com" style="color:rgba(255,255,255,0.35);text-decoration:none">1714376821@qq.com</a>
+    </div>
+    <div style="display:flex;gap:1.5vw;justify-content:center;margin-top:2.5vh" class="anim-up anim-d3">
+      <a href="https://mp.weixin.qq.com" target="_blank" class="lnk" style="font-size:clamp(0.5rem,1vh,0.62rem);padding:0.5vh 1.2vw">📱 个人公众号</a>
+      <a href="https://xiaopeixuan-portfolio-rfrctywr.edgeone.cool" target="_blank" class="lnk p" style="font-size:clamp(0.5rem,1vh,0.62rem);padding:0.5vh 1.2vw">🌐 在线作品集</a>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     PAGE 02 — ABOUT ME
+     个人定位。核心竞争力。不要自我介绍。
+     ================================================================ -->
+<div class="slide" data-index="1">
+  <div class="col2-w">
+    <div class="stack" style="gap:1.8vh">
+      <div class="t-section">ABOUT · 个人定位</div>
+      <div class="t-h2 anim-up" style="font-weight:700">
+        游戏广告<span class="c-cyan">创意策划</span>
+      </div>
+      <div class="t-body anim-up anim-d1" style="font-size:clamp(0.65rem,1.5vh,0.9rem)">
+        <span class="c-cyan">传播学专业</span>背景 × <span class="c-purple">大厂实习实战</span> × <span class="c-green">AI-native创意生产力</span><br>
+        聚焦游戏广告创意方向，具备用户洞察 → 创意策划 → AI内容生产 → 数据优化的完整闭环。
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:0.4vw;margin-top:0.3vh" class="anim-up anim-d2">
+        <span class="tag tag-c">创意策划</span><span class="tag tag-p">AI生产</span>
+        <span class="tag tag-c">广告素材</span><span class="tag tag-p">数据驱动</span>
+        <span class="tag tag-c">游戏理解</span><span class="tag tag-p">视频表达</span>
+        <span class="tag" style="border-color:#00D68F;color:#00D68F">试玩广告</span>
+      </div>
+      <div class="hr"></div>
+      <div class="t-body-s c-dim anim-up anim-d3">
+        华南师范大学 · 传播学 · 本科 · 2023.09–2027.07<br>
+        主修：传播学原理 / 广告传播 / 视听语言 / 新媒体概论
+      </div>
+      <div class="card-l c anim-up anim-d3" style="margin-top:0.3vh">
+        <div class="t-body" style="color:#00E0FF;font-size:clamp(0.6rem,1.4vh,0.82rem)">
+          「用AI重新定义游戏广告创意生产效率——让每个创意想法在1天内被验证」
+        </div>
+      </div>
+    </div>
+    <div class="stack" style="gap:1.4vh">
+      <div class="card center anim-up anim-d1" style="padding:8% 5%">
+        <div class="t-num-xl c-cyan g-cyan">4000w+</div>
+        <div class="t-body-s c-dim">AI漫剧单部最高热度</div>
+      </div>
+      <div class="card center anim-up anim-d2" style="padding:8% 5%">
+        <div class="t-num-lg c-purple">20+<span style="font-size:0.35em;font-weight:500">条/日</span></div>
+        <div class="t-body-s c-dim">广告素材稳定产能</div>
+      </div>
+      <div class="card center anim-up anim-d3" style="padding:8% 5%">
+        <div class="t-num-lg c-green">10×</div>
+        <div class="t-body-s c-dim">AI工具链效率提升</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     PAGE 03 — WHY ME
+     能力雷达可视化。不做长段落。
+     ================================================================ -->
+<div class="slide" data-index="2">
+  <div class="col2">
+    <div style="position:relative;display:flex;align-items:center;justify-content:center">
+      <div class="p3-ring" style="width:78%;aspect-ratio:1;top:11%;left:11%;position:absolute"></div>
+      <div class="p3-ring" style="width:58%;aspect-ratio:1;top:21%;left:21%;position:absolute"></div>
+      <canvas id="radar" style="position:relative;z-index:2;width:70%;max-width:38vh"></canvas>
+    </div>
+    <div class="stack" style="gap:1vh">
+      <div class="t-section">WHY ME · 能力雷达</div>
+      <div class="t-h3">8维<span class="c-cyan">创意能力</span>结构</div>
+      <div class="t-body-s c-dim" style="margin-bottom:0.5vh">覆盖游戏广告创意全链路</div>
+      <div class="hr" style="margin:0.3vh 0"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8vh">
+        <div style="padding:1.2vh 1vw;border-left:2px solid #00E0FF"><div class="t-h4 c-cyan" style="font-size:clamp(0.6rem,1.3vh,0.8rem)">游戏理解</div><div class="t-body-s c-dim">Steam 20+深度玩家</div></div>
+        <div style="padding:1.2vh 1vw;border-left:2px solid #7C5CFC"><div class="t-h4 c-purple" style="font-size:clamp(0.6rem,1.3vh,0.8rem)">AI创意</div><div class="t-body-s c-dim">Seedance/MJ/即梦工作流</div></div>
+        <div style="padding:1.2vh 1vw;border-left:2px solid #00D68F"><div class="t-h4 c-green" style="font-size:clamp(0.6rem,1.3vh,0.8rem)">创意策划</div><div class="t-body-s c-dim">脚本/分镜/镜头语言</div></div>
+        <div style="padding:1.2vh 1vw;border-left:2px solid #F0A030"><div class="t-h4 c-amber" style="font-size:clamp(0.6rem,1.3vh,0.8rem)">广告素材</div><div class="t-body-s c-dim">信息流/开屏/A/B测试</div></div>
+        <div style="padding:1.2vh 1vw;border-left:2px solid #F05080"><div class="t-h4 c-pink" style="font-size:clamp(0.6rem,1.3vh,0.8rem)">数据分析</div><div class="t-body-s c-dim">CTR/完播率/复盘迭代</div></div>
+        <div style="padding:1.2vh 1vw;border-left:2px solid #6366F1"><div class="t-h4" style="font-size:clamp(0.6rem,1.3vh,0.8rem);color:#6366F1">视频制作</div><div class="t-body-s c-dim">全流程创意视频表达</div></div>
+        <div style="padding:1.2vh 1vw;border-left:2px solid #22D3EE"><div class="t-h4" style="font-size:clamp(0.6rem,1.3vh,0.8rem);color:#22D3EE">用户洞察</div><div class="t-body-s c-dim">用户画像/行为分析</div></div>
+        <div style="padding:1.2vh 1vw;border-left:2px solid #A78BFA"><div class="t-h4" style="font-size:clamp(0.6rem,1.3vh,0.8rem);color:#A78BFA">协同交付</div><div class="t-body-s c-dim">跨团队/SOP沉淀</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     PAGE 04 — CASE 01 网易互娱
+     全作品集重点。Case Study标准结构。
+     ================================================================ -->
+<div class="slide" data-index="3">
+  <div class="stack full" style="gap:1.2vh">
+    <div style="display:flex;align-items:center;gap:1.5vw">
+      <div class="t-section" style="flex-shrink:0">CASE 01</div>
+      <div class="t-h3" style="margin:0">网易互娱<span class="c-cyan"> · AI漫剧创意策划</span></div>
+      <span style="margin-left:auto;font-size:clamp(0.52rem,1.1vh,0.68rem);color:rgba(255,255,255,0.25)">运营中心 · 内容制作 ｜ 2026.02–06</span>
+    </div>
+    <div class="hr"></div>
+
+    <!-- 3-column context -->
+    <div class="col3">
+      <div class="card-l c"><div class="t-h4 c-cyan" style="margin-bottom:0.5vh">项目背景</div><div class="t-body-s">围绕《梦幻西游》《第五人格》等头部游戏IP，探索AI技术在游戏内容营销中的创意应用场景</div></div>
+      <div class="card-l p"><div class="t-h4 c-purple" style="margin-bottom:0.5vh">核心目标</div><div class="t-body-s">以AI工具链降低创意生产成本，将制作周期从周级压缩至天级，同时提升内容热度与传播效率</div></div>
+      <div class="card-l g"><div class="t-h4 c-green" style="margin-bottom:0.5vh">我的角色</div><div class="t-body-s">创意脚本拆解 · 文字分镜设计 · 镜头语言规划 · AI视频制作 · SOP沉淀</div></div>
+    </div>
+
+    <!-- Creative Production Pipeline - Visual -->
+    <div class="t-h4 c-cyan" style="margin-top:0.3vh">▸ 创意生产管线（30秒理解全流程）</div>
+    <div style="display:flex;align-items:stretch;gap:0;width:100%;margin:0.6vh 0;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,0.05)">
+      <div style="flex:1;text-align:center;padding:2.5% 1.5%;background:rgba(0,224,255,0.06);border-right:1px solid rgba(255,255,255,0.04)">
+        <div style="font-size:clamp(0.9rem,2vh,1.5rem);margin-bottom:0.4vh">🎮</div>
+        <div class="t-h4 c-cyan" style="font-size:clamp(0.52rem,1.1vh,0.68rem);margin:0">游戏IP分析</div>
+        <div class="t-body-s c-dim" style="font-size:0.48rem;line-height:1.3;margin-top:0.2vh">梦幻西游<br>第五人格</div>
+      </div>
+      <div style="flex:1;text-align:center;padding:2.5% 1.5%;background:rgba(124,92,252,0.06);border-right:1px solid rgba(255,255,255,0.04)">
+        <div style="font-size:clamp(0.9rem,2vh,1.5rem);margin-bottom:0.4vh">🔍</div>
+        <div class="t-h4 c-purple" style="font-size:clamp(0.52rem,1.1vh,0.68rem);margin:0">用户洞察</div>
+        <div class="t-body-s c-dim" style="font-size:0.48rem;line-height:1.3;margin-top:0.2vh">平台热点<br>用户偏好</div>
+      </div>
+      <div style="flex:1;text-align:center;padding:2.5% 1.5%;background:rgba(0,224,255,0.06);border-right:1px solid rgba(255,255,255,0.04)">
+        <div style="font-size:clamp(0.9rem,2vh,1.5rem);margin-bottom:0.4vh">✍️</div>
+        <div class="t-h4 c-cyan" style="font-size:clamp(0.52rem,1.1vh,0.68rem);margin:0">创意脚本</div>
+        <div class="t-body-s c-dim" style="font-size:0.48rem;line-height:1.3;margin-top:0.2vh">脚本拆解<br>分镜设计</div>
+      </div>
+      <div style="flex:1;text-align:center;padding:2.5% 1.5%;background:rgba(124,92,252,0.06);border-right:1px solid rgba(255,255,255,0.04)">
+        <div style="font-size:clamp(0.9rem,2vh,1.5rem);margin-bottom:0.4vh">🤖</div>
+        <div class="t-h4 c-purple" style="font-size:clamp(0.52rem,1.1vh,0.68rem);margin:0">AI生产</div>
+        <div class="t-body-s c-dim" style="font-size:0.48rem;line-height:1.3;margin-top:0.2vh">Seedance·即梦<br>角色+视频生成</div>
+      </div>
+      <div style="flex:1;text-align:center;padding:2.5% 1.5%;background:rgba(0,224,255,0.06);border-right:1px solid rgba(255,255,255,0.04)">
+        <div style="font-size:clamp(0.9rem,2vh,1.5rem);margin-bottom:0.4vh">📊</div>
+        <div class="t-h4 c-cyan" style="font-size:clamp(0.52rem,1.1vh,0.68rem);margin:0">数据验证</div>
+        <div class="t-body-s c-dim" style="font-size:0.48rem;line-height:1.3;margin-top:0.2vh">播放量·完播率<br>用户反馈</div>
+      </div>
+      <div style="flex:1;text-align:center;padding:2.5% 1.5%;background:rgba(124,92,252,0.06)">
+        <div style="font-size:clamp(0.9rem,2vh,1.5rem);margin-bottom:0.4vh">🔄</div>
+        <div class="t-h4 c-purple" style="font-size:clamp(0.52rem,1.1vh,0.68rem);margin:0">迭代优化</div>
+        <div class="t-body-s c-dim" style="font-size:0.48rem;line-height:1.3;margin-top:0.2vh">SOP沉淀<br>剧本优化</div>
+      </div>
+    </div>
+    <!-- Pipeline stats bar -->
+    <div style="display:flex;align-items:center;gap:2%;width:100%;padding:1% 2%;background:rgba(0,224,255,0.02);border-radius:4px">
+      <span class="t-body-s" style="color:#00E0FF;flex-shrink:0;font-size:0.52rem">核心数据</span>
+      <div style="height:3px;background:rgba(255,255,255,0.06);flex:1;border-radius:2px;overflow:hidden">
+        <div style="width:100%;height:100%;background:linear-gradient(90deg,#00E0FF 0%,#7C5CFC 50%,#00D68F 100%);border-radius:2px"></div>
+      </div>
+      <div style="display:flex;gap:4%">
+        <span class="t-body-s c-cyan" style="font-size:0.55rem">4000w+ 热度</span>
+        <span class="t-body-s c-purple" style="font-size:0.55rem">200+ 素材</span>
+        <span class="t-body-s c-green" style="font-size:0.55rem">SOP输出</span>
+      </div>
+    </div>
+
+    <div class="col2" style="margin-top:0.3vh;gap:3%">
+      <div>
+        <div class="t-h4 c-cyan" style="font-size:clamp(0.56rem,1.2vh,0.72rem)">▸ 创意思路</div>
+        <div class="t-body-s">以游戏IP角色为核心，结合短视频平台热点与用户兴趣偏好，策划「AI漫剧」内容形态。传统制作周期从<span style="color:#00E0FF">周级压缩至天级</span>。</div>
+      </div>
+      <div>
+        <div class="t-h4 c-purple" style="font-size:clamp(0.56rem,1.2vh,0.72rem)">▸ 关键思考</div>
+        <div class="t-body-s">AI不是替代创意，而是<span style="color:#00E0FF">创意加速器</span>。输出《AI漫剧制作SOP》《新人入职指南》，将个人能力转化为团队可复制的方法论——从执行者到策略者的关键跃迁。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     PAGE 05 — CASE 02 百度YY
+     广告素材/A/B Test/竞品分析/数据优化
+     ================================================================ -->
+<div class="slide" data-index="4">
+  <div class="stack full" style="gap:1.2vh">
+    <div style="display:flex;align-items:center;gap:1.5vw">
+      <div class="t-section" style="flex-shrink:0">CASE 02</div>
+      <div class="t-h3" style="margin:0">百度YY<span class="c-purple"> · 广告素材创意与优化</span></div>
+      <span style="margin-left:auto;font-size:clamp(0.52rem,1.1vh,0.68rem);color:rgba(255,255,255,0.25)">用户增长部 · 内容运营 ｜ 2025.09–2026.01</span>
+    </div>
+    <div class="hr"></div>
+
+    <div class="col2-w">
+      <div class="stack" style="gap:1vh">
+        <div class="card-l c">
+          <div class="t-h4 c-cyan" style="margin-bottom:0.3vh">广告素材策划</div>
+          <div class="t-body-s">负责信息流、开屏、应用商店等多渠道广告素材创意策划与制作。结合渠道用户特征设计视频节奏、画面表现及文案内容，日均输出<span style="color:#00E0FF">20+条</span>推广素材。</div>
+        </div>
+        <div class="card-l p">
+          <div class="t-h4 c-purple" style="margin-bottom:0.3vh">竞品素材分析</div>
+          <div class="t-body-s">持续拆解竞品广告素材及平台爆款内容，分析用户点击动机、创意表现形式及传播逻辑，挖掘素材创意机会点。</div>
+        </div>
+        <div class="card-l g">
+          <div class="t-h4 c-green" style="margin-bottom:0.3vh">A/B测试与创意迭代</div>
+          <div class="t-body-s">围绕封面、前三秒钩子、文案表达、字幕风格等维度开展A/B测试。根据CTR、完播率等核心指标持续优化，<span style="color:#00D68F">点击率提升15%</span>。</div>
+        </div>
+      </div>
+
+      <div class="stack" style="gap:1.2vh">
+        <!-- A/B Test with visual comparison bars -->
+        <div class="card" style="padding:4% 5%">
+          <div class="t-section" style="margin-bottom:0.8vh;font-size:0.55rem">A/B TEST · 创意迭代框架</div>
+          <div style="display:flex;flex-direction:column;gap:0.4vh">
+            <div style="display:flex;align-items:center;gap:2%">
+              <span class="t-body-s c-dim" style="width:18%;flex-shrink:0;font-size:0.5rem">封面设计</span>
+              <div style="flex:1;display:flex;align-items:center;gap:3%">
+                <div style="flex:1;height:clamp(14px,1.6vh,20px);background:rgba(255,255,255,0.06);border-radius:3px;position:relative;overflow:hidden">
+                  <div style="position:absolute;left:0;top:0;height:100%;width:42%;background:rgba(255,255,255,0.08);border-radius:3px;display:flex;align-items:center;padding-left:6px"><span class="t-body-s c-dim" style="font-size:0.42rem">A</span></div>
+                  <div style="position:absolute;left:42%;top:0;height:100%;width:58%;background:rgba(0,224,255,0.25);border-radius:3px;display:flex;align-items:center;padding-left:6px"><span class="t-body-s c-cyan" style="font-size:0.42rem">B ✓</span></div>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:2%">
+              <span class="t-body-s c-dim" style="width:18%;flex-shrink:0;font-size:0.5rem">前三秒钩子</span>
+              <div style="flex:1;display:flex;align-items:center;gap:3%">
+                <div style="flex:1;height:clamp(14px,1.6vh,20px);background:rgba(255,255,255,0.06);border-radius:3px;position:relative;overflow:hidden">
+                  <div style="position:absolute;left:0;top:0;height:100%;width:38%;background:rgba(255,255,255,0.08);border-radius:3px;display:flex;align-items:center;padding-left:6px"><span class="t-body-s c-dim" style="font-size:0.42rem">A</span></div>
+                  <div style="position:absolute;left:38%;top:0;height:100%;width:62%;background:rgba(124,92,252,0.25);border-radius:3px;display:flex;align-items:center;padding-left:6px"><span class="t-body-s c-purple" style="font-size:0.42rem">B ✓</span></div>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:2%">
+              <span class="t-body-s c-dim" style="width:18%;flex-shrink:0;font-size:0.5rem">文案表达</span>
+              <div style="flex:1;display:flex;align-items:center;gap:3%">
+                <div style="flex:1;height:clamp(14px,1.6vh,20px);background:rgba(255,255,255,0.06);border-radius:3px;position:relative;overflow:hidden">
+                  <div style="position:absolute;left:0;top:0;height:100%;width:44%;background:rgba(255,255,255,0.08);border-radius:3px;display:flex;align-items:center;padding-left:6px"><span class="t-body-s c-dim" style="font-size:0.42rem">A</span></div>
+                  <div style="position:absolute;left:44%;top:0;height:100%;width:56%;background:rgba(0,224,255,0.25);border-radius:3px;display:flex;align-items:center;padding-left:6px"><span class="t-body-s c-cyan" style="font-size:0.42rem">B ✓</span></div>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:2%">
+              <span class="t-body-s c-dim" style="width:18%;flex-shrink:0;font-size:0.5rem">字幕风格</span>
+              <div style="flex:1;display:flex;align-items:center;gap:3%">
+                <div style="flex:1;height:clamp(14px,1.6vh,20px);background:rgba(255,255,255,0.06);border-radius:3px;position:relative;overflow:hidden">
+                  <div style="position:absolute;left:0;top:0;height:100%;width:40%;background:rgba(255,255,255,0.08);border-radius:3px;display:flex;align-items:center;padding-left:6px"><span class="t-body-s c-dim" style="font-size:0.42rem">A</span></div>
+                  <div style="position:absolute;left:40%;top:0;height:100%;width:60%;background:rgba(124,92,252,0.25);border-radius:3px;display:flex;align-items:center;padding-left:6px"><span class="t-body-s c-purple" style="font-size:0.42rem">B ✓</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="data-row">
+          <div class="data-unit"><div class="val c-green">+15%</div><div class="lbl">CTR提升</div></div>
+          <div class="data-unit"><div class="val c-cyan">20+</div><div class="lbl">日均素材产出</div></div>
+        </div>
+
+        <div class="card-l a">
+          <div class="t-body-s"><span style="color:#F0A030">▸ 游戏活动：</span>参与"YY语音金秋嘉年华·无畏契约校园赛"宣传项目，负责赛事创意视频包装及视觉素材制作。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     PAGE 06 — CASE 03 橙浪
+     用户洞察/创意策划/传播策略/内容优化
+     ================================================================ -->
+<div class="slide" data-index="5">
+  <div class="stack full" style="gap:1.2vh">
+    <div style="display:flex;align-items:center;gap:1.5vw">
+      <div class="t-section" style="flex-shrink:0">CASE 03</div>
+      <div class="t-h3" style="margin:0">橙浪湾区计划<span class="c-green"> · 品牌创意全案</span></div>
+      <span style="margin-left:auto;font-size:clamp(0.52rem,1.1vh,0.68rem);color:rgba(255,255,255,0.25)">校企助农品牌 · 视频负责人/社群运营 ｜ 2025.10–2026.01</span>
+    </div>
+    <div class="hr"></div>
+
+    <div class="col2">
+      <div class="stack" style="gap:0.8vh">
+        <div class="t-h4 c-cyan" style="margin-bottom:0">▸ 创意策略路径</div>
+        <!-- Strategy flow -->
+        <div style="display:flex;flex-direction:column;gap:0.4vh">
+          <div style="display:flex;align-items:center;gap:2%;padding:1.5% 2.5%;background:rgba(0,224,255,0.03);border-radius:4px">
+            <span style="color:#00E0FF;font-size:0.52rem;flex-shrink:0;width:10%">洞察</span>
+            <span style="color:rgba(255,255,255,0.15);margin:0 1%">→</span>
+            <span class="t-body-s" style="font-size:0.52rem">竞品同质化严重 → 用户对传统助农内容疲劳</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:2%;padding:1.5% 2.5%;background:rgba(124,92,252,0.03);border-radius:4px">
+            <span style="color:#7C5CFC;font-size:0.52rem;flex-shrink:0;width:10%">策略</span>
+            <span style="color:rgba(255,255,255,0.15);margin:0 1%">→</span>
+            <span class="t-body-s" style="font-size:0.52rem">「动物世界风格解说」——网感叙事建立独特品牌表达</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:2%;padding:1.5% 2.5%;background:rgba(0,214,143,0.03);border-radius:4px">
+            <span style="color:#00D68F;font-size:0.52rem;flex-shrink:0;width:10%">验证</span>
+            <span style="color:rgba(255,255,255,0.15);margin:0 1%">→</span>
+            <span class="t-body-s" style="font-size:0.52rem">播放量+30% · 内容转发300+次 · 可复用模式形成</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="stack" style="gap:1.2vh">
+        <div class="data-row">
+          <div class="data-unit"><div class="val c-green">+30%</div><div class="lbl">播放量提升</div></div>
+          <div class="data-unit"><div class="val c-cyan">300+</div><div class="lbl">内容转发</div></div>
+        </div>
+
+        <div class="card" style="padding:5% 6%">
+          <div class="t-h4 c-cyan" style="margin-bottom:0.8vh">创意方法论验证</div>
+          <div class="t-body-s">
+            <span style="color:#00E0FF">①</span> 用户需求分析 → 竞品拆解 → 差异化定位<br>
+            <span style="color:#7C5CFC">②</span> 创意脚本设计 → 镜头语言规划 → 全流程制作<br>
+            <span style="color:#00D68F">③</span> 数据跟踪复盘 → 内容结构迭代 → 传播效果优化
+          </div>
+        </div>
+
+        <div class="card-l c" style="padding:3% 4%">
+          <div class="t-body-s"><span style="color:#00E0FF">▸ 核心启示：</span>好的创意来自对用户的深度理解。数据是最好的创意导师——不是凭感觉做内容，而是让每一次创作都有据可依。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     PAGE 07 — 内容策划能力
+     不要截图。要方法论：定位/画像/爆款拆解/增长/方法论
+     ================================================================ -->
+<div class="slide" data-index="6">
+  <div class="col2">
+    <div class="stack" style="gap:1.4vh">
+      <div class="t-section">CONTENT CAPABILITY · 内容策划</div>
+      <div class="t-h3">3年内容实战<span class="c-cyan">方法论</span></div>
+      <div class="t-body-s c-dim"><a href="https://mp.weixin.qq.com" target="_blank" style="color:rgba(255,255,255,0.4);text-decoration:none;border-bottom:1px dotted rgba(255,255,255,0.12)">个人公众号「不愿再做一条emo的培根」</a>· 主理人 · 2021.11至今</div>
+      <div class="hr-cyan"></div>
+
+      <div class="card-l c">
+        <div class="t-h4 c-cyan" style="margin-bottom:0.3vh">内容定位</div>
+        <div class="t-body-s">成长与生活类内容。以真实叙事+数据验证建立个人内容品牌，持续验证<span style="color:#00E0FF">内容与用户的对话关系</span></div>
+      </div>
+      <div class="card-l p">
+        <div class="t-h4 c-purple" style="margin-bottom:0.3vh">用户画像</div>
+        <div class="t-body-s">18-25岁年轻人，关注成长、情感、生活方式话题——与游戏广告核心受众高度重合</div>
+      </div>
+      <div class="card-l g">
+        <div class="t-h4 c-green" style="margin-bottom:0.3vh">内容方法论</div>
+        <div class="t-body-s">选题验证 → 结构设计 → 发布测试 → 数据复盘 → 方向迭代。形成可复用的内容生产SOP</div>
+      </div>
+    </div>
+
+    <div class="stack" style="gap:1.4vh">
+      <!-- Data highlights -->
+      <div class="data-row">
+        <div class="data-unit"><div class="val c-cyan">141</div><div class="lbl">原创内容篇数</div></div>
+        <div class="data-unit"><div class="val" style="color:#7C5CFC">4w+</div><div class="lbl">单篇最高阅读量</div></div>
+      </div>
+      <div class="data-row">
+        <div class="data-unit"><div class="val c-green">+50%</div><div class="lbl">平均阅读量增长</div></div>
+        <div class="data-unit"><div class="val" style="color:#F0A030">3年+</div><div class="lbl">持续运营周期</div></div>
+      </div>
+
+      <!-- 爆款拆解逻辑 -->
+      <div class="card" style="padding:5% 6%">
+        <div class="t-h4 c-cyan" style="margin-bottom:0.8vh">爆款内容拆解逻辑</div>
+        <div style="display:flex;flex-direction:column;gap:0.5vh">
+          <div class="t-body-s"><span style="color:#00E0FF">① 选题 —</span> 切入用户情绪共鸣点，而非自嗨</div>
+          <div class="t-body-s"><span style="color:#7C5CFC">② 标题 —</span> 制造好奇心缺口 + 明确利益点承诺</div>
+          <div class="t-body-s"><span style="color:#00D68F">③ 开头 —</span> 3秒建立阅读承诺，降低跳出</div>
+          <div class="t-body-s"><span style="color:#F0A030">④ 结构 —</span> 段落节奏控制完读率与信息密度</div>
+          <div class="t-body-s"><span style="color:#F05080">⑤ 结尾 —</span> 设计互动钩子，引导转发与讨论</div>
+        </div>
+      </div>
+
+      <div class="card-l c" style="padding:2.5% 3.5%">
+        <div class="t-body-s" style="font-size:clamp(0.5rem,1.1vh,0.66rem)">3年持续创作让我深刻理解「内容与用户的对话关系」——这对游戏广告的<span style="color:#00E0FF">前三秒吸引力</span>和<span style="color:#00D68F">转化钩子设计</span>有直接迁移价值。内容爆款的底层逻辑与广告素材高度一致：用户只关心自己。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     PAGE 08 — AI WORKFLOW
+     Workflow图，不是工具列表
+     ================================================================ -->
+<div class="slide" data-index="7">
+  <div class="stack full" style="gap:1.5vh">
+    <div class="t-section">AI CAPABILITY · AI创意</div>
+    <div class="t-h2">AI<span class="c-cyan">创意工作流</span></div>
+    <div class="t-body-s c-dim">不是工具堆砌——是已验证的创意生产效率引擎</div>
+    <div class="hr"></div>
+
+    <!-- Main Workflow -->
+    <div class="flow-row" style="margin:1.5vh 0">
+      <div class="flow-step">
+        <div class="icon">🧠</div>
+        <div class="t-h4 c-cyan" style="font-size:clamp(0.62rem,1.4vh,0.85rem)">ChatGPT · Claude</div>
+        <div class="t-body-s c-dim">创意策略<br>脚本生成<br>文案优化</div>
+      </div>
+      <span class="flow-arr">→</span>
+      <div class="flow-step">
+        <div class="icon">🎨</div>
+        <div class="t-h4 c-purple" style="font-size:clamp(0.62rem,1.4vh,0.85rem)">Midjourney</div>
+        <div class="t-body-s c-dim">角色概念<br>场景设计<br>视觉风格定义</div>
+      </div>
+      <span class="flow-arr">→</span>
+      <div class="flow-step">
+        <div class="icon">🎬</div>
+        <div class="t-h4 c-cyan" style="font-size:clamp(0.62rem,1.4vh,0.85rem)">Seedance · 即梦</div>
+        <div class="t-body-s c-dim">AI视频生成<br>镜头语言设计<br>动作驱动</div>
+      </div>
+      <span class="flow-arr">→</span>
+      <div class="flow-step">
+        <div class="icon">⚡</div>
+        <div class="t-h4 c-purple" style="font-size:clamp(0.62rem,1.4vh,0.85rem)">CodeBuddy</div>
+        <div class="t-body-s c-dim">流程自动化<br>效率工具开发<br>SOP沉淀</div>
+      </div>
+    </div>
+
+    <div class="hr" style="margin:0.5vh 0"></div>
+
+    <div class="col3">
+      <div class="card-l c">
+        <div class="t-h4 c-cyan" style="margin-bottom:0.4vh;font-size:clamp(0.6rem,1.3vh,0.8rem)">效率提升</div>
+        <div class="t-body-s">AI工具链将视频制作周期从<span style="color:#00E0FF">周级压缩至天级</span>，实现创意想法的快速验证与迭代</div>
+      </div>
+      <div class="card-l p">
+        <div class="t-h4 c-purple" style="margin-bottom:0.4vh;font-size:clamp(0.6rem,1.3vh,0.8rem)">标准化沉淀</div>
+        <div class="t-body-s">独立编写《AI漫剧制作SOP》《新人入职指南》，将AI创意流程<span style="color:#7C5CFC">标准化、可复制化</span></div>
+      </div>
+      <div class="card-l g">
+        <div class="t-h4 c-green" style="margin-bottom:0.4vh;font-size:clamp(0.6rem,1.3vh,0.8rem)">素材资产管理</div>
+        <div class="t-body-s">搭建并维护<span style="color:#00D68F">200+角色场景素材库</span>，建立可复用的创意素材管理体系</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     PAGE 09 — 游戏理解
+     Steam20+/常玩游戏/广告创意分析
+     ================================================================ -->
+<div class="slide" data-index="8">
+  <div class="stack full" style="gap:1.2vh">
+    <div class="t-section">GAME UNDERSTANDING · 游戏理解</div>
+    <div class="t-h3">不止是<span class="c-cyan">玩家</span>——是理解游戏作为<span class="c-purple">创意载体</span>的逻辑</div>
+    <div class="hr"></div>
+
+    <div class="col2" style="margin-bottom:0.5vh">
+      <div class="stack" style="gap:0.8vh">
+        <div class="t-h4 c-cyan" style="margin-bottom:0">游戏经历</div>
+        <div class="t-body-s">Steam游戏库<span style="color:#00E0FF">20+款</span> · 长期活跃：蛋仔派对 / 王者荣耀 / 鹅鸭杀 / Picopark · 关注休闲社交、多人合作品类 · 持续追踪抖音、快手平台游戏广告素材及热门创意趋势</div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center">
+        <div style="display:flex;gap:2%;width:100%">
+          <div class="game-card" style="flex:1"><div class="emoji">🥚</div><div class="t-h4" style="font-size:clamp(0.6rem,1.3vh,0.8rem)">蛋仔派对</div><div class="t-body-s c-dim" style="font-size:0.52rem">休闲社交·UGC</div></div>
+          <div class="game-card" style="flex:1"><div class="emoji">👑</div><div class="t-h4" style="font-size:clamp(0.6rem,1.3vh,0.8rem)">王者荣耀</div><div class="t-body-s c-dim" style="font-size:0.52rem">MOBA·竞技</div></div>
+          <div class="game-card" style="flex:1"><div class="emoji">🦆</div><div class="t-h4" style="font-size:clamp(0.6rem,1.3vh,0.8rem)">鹅鸭杀</div><div class="t-body-s c-dim" style="font-size:0.52rem">社交推理·派对</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hr" style="margin:0.3vh 0"></div>
+
+    <!-- Concrete Game Ad Breakdown: 蛋仔派对 -->
+    <div class="t-h4 c-purple">▸ 试玩广告创意拆解 · 蛋仔派对</div>
+    <div style="display:flex;gap:2%;width:100%;margin-top:0.3vh">
+      <!-- Left: Analysis -->
+      <div style="flex:1.15;display:flex;flex-direction:column;gap:0.6vh">
+        <div style="display:flex;gap:3%;align-items:stretch">
+          <div class="card" style="flex:1;padding:3% 4%">
+            <div class="t-h4 c-cyan" style="font-size:clamp(0.52rem,1.1vh,0.68rem);margin-bottom:0.3vh">游戏核心卖点</div>
+            <div class="t-body-s" style="font-size:0.52rem;line-height:1.5">Q萌角色 + UGC地图 + 社交互动<br>低门槛上手，高社交传播属性</div>
+          </div>
+          <div class="card" style="flex:1;padding:3% 4%">
+            <div class="t-h4 c-purple" style="font-size:clamp(0.52rem,1.1vh,0.68rem);margin-bottom:0.3vh">目标用户画像</div>
+            <div class="t-body-s" style="font-size:0.52rem;line-height:1.5">12-22岁年轻群体<br>女性占比高 · 社交驱动 · 碎片时间</div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:0.35vh;padding:2% 3%;background:rgba(0,224,255,0.03);border-radius:5px;border:1px solid rgba(255,255,255,0.04)">
+          <div class="t-body-s"><span style="color:#00E0FF">▸ 钩子设计（0-3s）：</span>Q萌角色意外死亡/搞笑失误 → 制造"怎么会这样"的好奇缺口</div>
+          <div class="t-body-s"><span style="color:#7C5CFC">▸ 信息层（3-8s）：</span>展示游戏核心玩法——跑酷闯关、UGC创意地图的多样性与趣味性</div>
+          <div class="t-body-s"><span style="color:#00D68F">▸ 转化层（8-15s）：</span>社交驱动——"和朋友一起玩""你也能造这样的地图"激发下载动机</div>
+        </div>
+      </div>
+      <!-- Right: Key Insight -->
+      <div style="flex:0.85;display:flex;flex-direction:column;gap:0.6vh">
+        <div class="card" style="padding:4% 5%;flex:1;display:flex;flex-direction:column;justify-content:center">
+          <div class="t-h4 c-cyan" style="font-size:clamp(0.56rem,1.2vh,0.72rem);margin-bottom:0.4vh">试玩类广告创意策略</div>
+          <div class="t-body-s" style="font-size:0.52rem;line-height:1.6">
+            <span style="color:#00E0FF">① 失败驱动：</span>失败画面比成功更具传播力<br>
+            <span style="color:#7C5CFC">② 社交锚点：</span>"和朋友玩"比"好玩"更有力<br>
+            <span style="color:#00D68F">③ UGC裂变：</span>玩家自己创造的内容是最好的广告<br>
+            <span style="color:#F0A030">④ 碎片适配：</span>15秒内完成兴趣激发→下载转化
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-l c" style="margin-top:0.3vh;padding:2% 3%">
+      <div class="t-body-s" style="font-size:0.5rem"><span style="color:#00E0FF">▸ 可迁移洞察：</span>长期拆解抖音、快手游戏买量素材，持续追踪不同品类（SLG/休闲/社交/二次元）创意趋势变迁。游戏理解不是玩过多少游戏——而是能站在玩家视角拆解「这条广告为什么让我想下载」，并反哺到创意生产中去。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     PAGE 10 — 创意方法论
+     洞察→创意→脚本→制作→数据→优化 闭环
+     ================================================================ -->
+<div class="slide" data-index="9">
+  <div class="stack full" style="gap:1.2vh">
+    <div class="t-section">METHODOLOGY · 创意方法</div>
+    <div class="t-h2">创意<span class="c-cyan">闭环系统</span></div>
+    <div class="t-body-s c-dim">从用户洞察到效果优化的完整创意生产系统</div>
+    <div class="hr"></div>
+
+    <!-- 5-Phase Flow with feedback loop -->
+    <div class="flow-row" style="margin:2vh 0;position:relative">
+      <div class="flow-step">
+        <div style="background:rgba(0,224,255,0.08);width:clamp(36px,5vh,48px);height:clamp(36px,5vh,48px);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;margin-bottom:0.6vh;font-size:clamp(0.7rem,1.6vh,1rem);color:#00E0FF;font-weight:700">1</div>
+        <div class="t-h4 c-cyan" style="font-size:clamp(0.62rem,1.4vh,0.85rem)">洞察</div>
+        <div class="t-body-s c-dim">用户画像<br>竞品拆解<br>热点追踪</div>
+      </div>
+      <span class="flow-arr">→</span>
+      <div class="flow-step">
+        <div style="background:rgba(124,92,252,0.08);width:clamp(36px,5vh,48px);height:clamp(36px,5vh,48px);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;margin-bottom:0.6vh;font-size:clamp(0.7rem,1.6vh,1rem);color:#7C5CFC;font-weight:700">2</div>
+        <div class="t-h4 c-purple" style="font-size:clamp(0.62rem,1.4vh,0.85rem)">创意</div>
+        <div class="t-body-s c-dim">方向提炼<br>脚本设计<br>镜头规划</div>
+      </div>
+      <span class="flow-arr">→</span>
+      <div class="flow-step">
+        <div style="background:rgba(0,214,143,0.08);width:clamp(36px,5vh,48px);height:clamp(36px,5vh,48px);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;margin-bottom:0.6vh;font-size:clamp(0.7rem,1.6vh,1rem);color:#00D68F;font-weight:700">3</div>
+        <div class="t-h4 c-green" style="font-size:clamp(0.62rem,1.4vh,0.85rem)">制作</div>
+        <div class="t-body-s c-dim">AI工具链<br>视频执行<br>质量把控</div>
+      </div>
+      <span class="flow-arr">→</span>
+      <div class="flow-step">
+        <div style="background:rgba(240,160,48,0.08);width:clamp(36px,5vh,48px);height:clamp(36px,5vh,48px);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;margin-bottom:0.6vh;font-size:clamp(0.7rem,1.6vh,1rem);color:#F0A030;font-weight:700">4</div>
+        <div class="t-h4 c-amber" style="font-size:clamp(0.62rem,1.4vh,0.85rem)">数据</div>
+        <div class="t-body-s c-dim">A/B测试<br>CTR追踪<br>用户反馈</div>
+      </div>
+      <span class="flow-arr">→</span>
+      <div class="flow-step">
+        <div style="background:rgba(240,80,128,0.08);width:clamp(36px,5vh,48px);height:clamp(36px,5vh,48px);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;margin-bottom:0.6vh;font-size:clamp(0.7rem,1.6vh,1rem);color:#F05080;font-weight:700">5</div>
+        <div class="t-h4 c-pink" style="font-size:clamp(0.62rem,1.4vh,0.85rem)">优化</div>
+        <div class="t-body-s c-dim">结构迭代<br>方向调整<br>SOP沉淀</div>
+      </div>
+    </div>
+
+    <!-- Feedback loop indicator -->
+    <div style="display:flex;align-items:center;justify-content:center;gap:1.5%;margin:0.3vh 0">
+      <div style="width:clamp(20px,2.5vh,30px);height:1px;background:linear-gradient(90deg,transparent,rgba(240,80,128,0.3))"></div>
+      <span style="color:rgba(240,80,128,0.35);font-size:clamp(0.45rem,0.9vh,0.55rem);font-family:SF Mono,Consolas,monospace;letter-spacing:.08em">FEEDBACK LOOP → 回到洞察</span>
+      <div style="width:clamp(20px,2.5vh,30px);height:1px;background:linear-gradient(90deg,rgba(0,224,255,0.3),transparent)"></div>
+    </div>
+
+    <div class="hr" style="margin:0.5vh 0"></div>
+
+    <div class="col2" style="gap:3%">
+      <div style="padding:3% 4%;background:rgba(0,224,255,0.03);border:1px solid rgba(0,224,255,0.08);border-radius:8px">
+        <div class="t-h4 c-cyan" style="font-size:clamp(0.56rem,1.2vh,0.72rem);margin-bottom:0.4vh">闭环逻辑</div>
+        <div class="t-body-s">洞察驱动创意 → 创意指导制作 → 数据验证效果 → 优化反馈洞察。<br>每一轮循环都让创意更精准。</div>
+      </div>
+      <div style="padding:3% 4%;background:rgba(124,92,252,0.03);border:1px solid rgba(124,92,252,0.08);border-radius:8px">
+        <div class="t-h4 c-purple" style="font-size:clamp(0.56rem,1.2vh,0.72rem);margin-bottom:0.4vh">三次实战验证</div>
+        <div class="t-body-s">网易AI漫剧 · 百度广告素材 · 橙浪品牌内容<br>三个独立项目中完整跑通，非纸上谈兵。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     PAGE 11 — 核心优势
+     5个维度，每个一句话。不写性格。
+     ================================================================ -->
+<div class="slide" data-index="10">
+  <div class="stack full" style="gap:1.8vh">
+    <div class="t-section">ADVANTAGES · 核心优势</div>
+    <div class="t-h2">为什么选择<span class="c-cyan">我</span></div>
+    <div class="t-body-s c-dim">5个维度，定义不可替代性</div>
+    <div class="hr"></div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.8vh;width:100%;margin-top:0.5vh">
+      <div style="display:flex;gap:1.5%;align-items:flex-start">
+        <span style="font-size:clamp(1.4rem,3vh,2rem);flex-shrink:0">💡</span>
+        <div><div class="t-h4 c-cyan" style="font-size:clamp(0.7rem,1.5vh,0.95rem)">创意策划力</div>
+        <div class="t-body-s c-dim">基于用户洞察、竞品分析和平台逻辑，形成可复用的创意产出体系——不是凭感觉，是方法论驱动。</div></div>
+      </div>
+      <div style="display:flex;gap:1.5%;align-items:flex-start">
+        <span style="font-size:clamp(1.4rem,3vh,2rem);flex-shrink:0">📊</span>
+        <div><div class="t-h4 c-purple" style="font-size:clamp(0.7rem,1.5vh,0.95rem)">数据驱动思维</div>
+        <div class="t-body-s c-dim">A/B测试验证假设，CTR/完播率指导迭代，数据复盘沉淀方法论——不是"看数据"，是用数据做决策。</div></div>
+      </div>
+      <div style="display:flex;gap:1.5%;align-items:flex-start">
+        <span style="font-size:clamp(1.4rem,3vh,2rem);flex-shrink:0">🤖</span>
+        <div><div class="t-h4 c-green" style="font-size:clamp(0.7rem,1.5vh,0.95rem)">AI创意生产力</div>
+        <div class="t-body-s c-dim">从策划→生成→制作的完整AI工作流，创意生产效率提升10倍——不是"会用AI工具"，是建立了AI-native的创意工作方式。</div></div>
+      </div>
+      <div style="display:flex;gap:1.5%;align-items:flex-start">
+        <span style="font-size:clamp(1.4rem,3vh,2rem);flex-shrink:0">🎮</span>
+        <div><div class="t-h4 c-amber" style="font-size:clamp(0.7rem,1.5vh,0.95rem)">游戏理解深度</div>
+        <div class="t-body-s c-dim">Steam 20+款，理解游戏机制、玩家心理和社交驱动——能从玩家视角出发做广告创意，而非从广告人视角。</div></div>
+      </div>
+      <div style="display:flex;gap:1.5%;align-items:flex-start;grid-column:1/-1">
+        <span style="font-size:clamp(1.4rem,3vh,2rem);flex-shrink:0">🚀</span>
+        <div><div class="t-h4 c-pink" style="font-size:clamp(0.7rem,1.5vh,0.95rem)">项目闭环交付力</div>
+        <div class="t-body-s c-dim">独立完成从创意策划→内容制作→效果优化的完整链路。具备跨团队协同与SOP沉淀能力——从执行到策略的完整闭环。</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     PAGE 12 — THANK YOU
+     极简
+     ================================================================ -->
+<div class="slide" data-index="11">
+  <span class="corner-tl"></span><span class="corner-br"></span>
+  <div class="p1-bg"></div>
+  <div style="text-align:center;position:relative;z-index:2">
+    <div class="t-section" style="margin-bottom:3.5vh">THANK YOU</div>
+    <div class="t-h1" style="margin-bottom:1.5vh">
+      Let's<br><span class="c-cyan g-cyan">Create</span>
+    </div>
+    <div class="hr-cyan" style="margin:2vh auto;width:56px"></div>
+    <div class="t-body" style="color:rgba(255,255,255,0.42);margin-bottom:3vh;font-size:clamp(0.65rem,1.5vh,0.88rem)">
+      游戏广告的下一站——AI驱动的创意生产<br>
+      <span style="color:rgba(0,224,255,0.5);font-size:0.9em">期待与你一起，重新定义游戏广告的创意效率</span>
+    </div>
+    <div class="t-body-s" style="color:rgba(255,255,255,0.5);line-height:1.9">
+      肖培轩 · 试玩广告创意策划<br>
+      <a href="tel:13538047789" style="color:rgba(255,255,255,0.4);text-decoration:none"><span class="mono">13538047789</span></a> &nbsp;|&nbsp; <a href="mailto:1714376821@qq.com" style="color:rgba(255,255,255,0.4);text-decoration:none"><span class="mono">1714376821@qq.com</span></a><br>
+      <span style="color:rgba(255,255,255,0.2)">华南师范大学 · 传播学 &nbsp;|&nbsp; 广州 &nbsp;|&nbsp; 可随时到岗</span>
+    </div>
+  </div>
+</div>
+
+</div><!-- /slides -->
+
+<!-- ================================================================
+     NAVIGATION
+     ================================================================ -->
+<div class="nav">
+  <button class="nav-btn" onclick="goPrev()">← PREV</button>
+  <div class="nav-dots" id="navDots"></div>
+  <button class="nav-btn" onclick="goNext()">NEXT →</button>
+  <span class="nav-num" id="pageNum">01 / 12</span>
+</div>
+
+</div><!-- /stage -->
+</div><!-- /viewport -->
+
+<script>
+// ---- SLIDE NAV ----
+let cur=0;
+const slides=document.querySelectorAll('.slide');
+const total=slides.length;
+const dots=document.getElementById('navDots');
+const pn=document.getElementById('pageNum');
+
+for(let i=0;i<total;i++){
+  const d=document.createElement('span');
+  d.className='nav-dot'+(i===0?' active':'');
+  d.onclick=()=>go(i);
+  dots.appendChild(d);
+}
+
+function upd(){
+  slides.forEach((s,i)=>s.classList.toggle('active',i===cur));
+  document.querySelectorAll('.nav-dot').forEach((d,i)=>d.classList.toggle('active',i===cur));
+  pn.textContent=String(cur+1).padStart(2,'0')+' / '+String(total).padStart(2,'0');
+}
+function go(i){if(i>=0&&i<total){cur=i;upd()}}
+function goNext(){go(cur+1)}
+function goPrev(){go(cur-1)}
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' '){e.preventDefault();goNext()}
+  else if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();goPrev()}
+});
+
+let tx=0;
+document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX});
+document.addEventListener('touchend',e=>{
+  const d=tx-e.changedTouches[0].clientX;
+  if(Math.abs(d)>50){d>0?goNext():goPrev()}
+});
+
+document.addEventListener('wheel',e=>{
+  if(Math.abs(e.deltaY)>25){e.deltaY>0?goNext():goPrev()}
+},{passive:true});
+
+// ---- RADAR CHART ----
+function drawRadar(){
+  const c=document.getElementById('radar');
+  if(!c)return;
+  const ctx=c.getContext('2d');
+  const p=c.parentElement;
+  const s=p.clientWidth*0.65;
+  c.width=s*2;c.height=s*2;
+  c.style.width=s+'px';c.style.height=s+'px';
+  const cx=s,cy=s,r=s*0.68;
+  const labels=['游戏理解','AI创意','创意策划','广告素材','数据分析','视频制作','用户洞察','协同交付'];
+  const vals=[85,90,82,78,76,72,80,75];
+  const n=labels.length;
+
+  // Grid
+  for(let lv=1;lv<=5;lv++){
+    ctx.beginPath();
+    for(let i=0;i<=n;i++){
+      const a=Math.PI*2/n*i-Math.PI/2;
+      const pr=r*lv/5;
+      i===0?ctx.moveTo(cx+pr*Math.cos(a),cy+pr*Math.sin(a)):ctx.lineTo(cx+pr*Math.cos(a),cy+pr*Math.sin(a));
+    }
+    ctx.strokeStyle='rgba(255,255,255,'+(0.03+lv*0.02)+')';
+    ctx.lineWidth=1;ctx.stroke();
+  }
+  // Axes
+  for(let i=0;i<n;i++){
+    const a=Math.PI*2/n*i-Math.PI/2;
+    ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+r*Math.cos(a),cy+r*Math.sin(a));
+    ctx.strokeStyle='rgba(255,255,255,0.06)';ctx.stroke();
+  }
+  // Data
+  ctx.beginPath();
+  for(let i=0;i<=n;i++){
+    const a=Math.PI*2/n*(i%n)-Math.PI/2;
+    const pr=r*vals[i%n]/100;
+    i===0?ctx.moveTo(cx+pr*Math.cos(a),cy+pr*Math.sin(a)):ctx.lineTo(cx+pr*Math.cos(a),cy+pr*Math.sin(a));
+  }
+  ctx.fillStyle='rgba(0,224,255,0.08)';ctx.fill();
+  ctx.strokeStyle='#00E0FF';ctx.lineWidth=1.5;ctx.stroke();
+  // Dots
+  for(let i=0;i<n;i++){
+    const a=Math.PI*2/n*i-Math.PI/2;
+    const pr=r*vals[i]/100;
+    ctx.beginPath();ctx.arc(cx+pr*Math.cos(a),cy+pr*Math.sin(a),3,0,Math.PI*2);
+    ctx.fillStyle='#00E0FF';ctx.fill();
+  }
+  // Labels
+  ctx.fillStyle='rgba(255,255,255,0.6)';
+  ctx.font=(s*0.042)+'px "PingFang SC","Microsoft YaHei",sans-serif';
+  ctx.textAlign='center';ctx.textBaseline='middle';
+  for(let i=0;i<n;i++){
+    const a=Math.PI*2/n*i-Math.PI/2;
+    const lr=r*1.22;
+    ctx.fillText(labels[i],cx+lr*Math.cos(a),cy+lr*Math.sin(a));
+  }
+}
+window.addEventListener('load',()=>setTimeout(drawRadar,150));
+window.addEventListener('resize',()=>setTimeout(drawRadar,200));
+upd();
+</script>
+</body>
+</html>
